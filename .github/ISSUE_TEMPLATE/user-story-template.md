@@ -7,7 +7,7 @@ assignees: niraj-sachania
 
 ---
 
-As a **role**, I can **capability**, so that *benefit**
+As a **role**, I can **capability**, so that **benefit**
 
 ### Acceptance criteria
 
