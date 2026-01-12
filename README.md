@@ -68,7 +68,15 @@ urlpatterns = [
 ]
 ```
 
-### 5. Run Server
+### 5. Troubleshooting
+
+- **psycopg2 Installation Issue**: If you encounter a `Getting requirements to build wheel` error when installing `psycopg2`, use the pre-compiled binary package instead:
+  ```bash
+  pip3 install psycopg2-binary
+  ```
+  This avoids the need to compile from source. For more details, see the [official documentation](https://www.psycopg.org/docs/install.html).
+
+### 6. Run Server
 
 ```bash
 python3 manage.py runserver
