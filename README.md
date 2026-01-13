@@ -116,6 +116,106 @@ The server will run on `http://localhost:8000/` by default.
 
 **To stop the server:** Press `Ctrl+C` in the terminal
 
+## Terminal Commands Reference
+
+All terminal commands used in this project, in chronological order:
+
+### Environment Setup
+
+```bash
+# Activate virtual environment
+source /Users/nss/Documents/dev/2025/django-blog/.venv/bin/activate
+```
+
+### Django Installation
+
+```bash
+# Install Django
+pip3 install django~=4.2.1
+
+# Save dependencies
+pip3 freeze > requirements.txt
+```
+
+### Project Creation
+
+```bash
+# Create Django project (config directory)
+django-admin startproject config .
+
+# Create blog app
+python3 manage.py startapp blog
+```
+
+### Database Setup
+
+```bash
+# Install PostgreSQL adapter
+pip3 install psycopg2-binary
+
+# Install database URL parser
+pip3 install dj-database-url
+
+# Update requirements
+pip3 freeze > requirements.txt
+
+# Make migrations (create migration files)
+python3 manage.py makemigrations
+
+# Apply migrations (update database schema)
+python3 manage.py migrate
+
+# Create superuser for admin access
+python3 manage.py createsuperuser
+```
+
+### Deployment Setup
+
+```bash
+# Install Gunicorn web server
+pip3 install gunicorn
+
+# Update requirements
+pip3 freeze > requirements.txt
+
+# Log in to Heroku
+heroku login
+
+# Create Heroku app
+heroku create <app-name>
+
+# Add PostgreSQL database
+heroku addons:create heroku-postgresql:mini
+
+# Set environment variables
+heroku config:set SECRET_KEY="your-secret-key"
+heroku config:set DATABASE_URL="your-database-url"
+
+# Deploy to Heroku
+git push heroku main
+
+# Run migrations on Heroku
+heroku run python manage.py migrate
+
+# Create superuser on Heroku
+heroku run python manage.py createsuperuser
+
+# Open deployed app
+heroku open
+
+# View logs
+heroku logs --tail
+```
+
+### Development Server
+
+```bash
+# Run local development server
+python3 manage.py runserver
+
+# Stop server: Ctrl+C
+```
+
 ## Key Concepts
 
 - **Virtual Environment**: Isolated Python environment for project dependencies
