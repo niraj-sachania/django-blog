@@ -76,7 +76,40 @@ urlpatterns = [
   ```
   This avoids the need to compile from source. For more details, see the [official documentation](https://www.psycopg.org/docs/install.html).
 
-### 6. Run Server
+- **Admin Theme/Styling Not Loading**: If the Django admin panel appears without CSS styling, set `DEBUG = True` in `config/settings.py`. This is typically needed during local development. In production, ensure static files are properly configured and collected.
+
+### 6. Load Sample Data (Optional)
+
+To populate the database with sample blog posts:
+
+1. Create a fixtures directory:
+   ```bash
+   mkdir -p blog/fixtures
+   ```
+
+2. Add your fixture data in `blog/fixtures/posts.json` (JSON format with model data)
+
+3. Load the fixture data:
+   ```bash
+   python3 ./manage.py loaddata posts
+   ```
+
+**To create a JSON dump of existing data:**
+
+```bash
+# Dump all data from a specific model
+python3 ./manage.py dumpdata blog.Post > blog/fixtures/posts.json
+
+# Dump with indentation for readability
+python3 ./manage.py dumpdata blog.Post --indent 2 > blog/fixtures/posts.json
+
+# Dump all data from the blog app
+python3 ./manage.py dumpdata blog --indent 2 > blog/fixtures/blog_data.json
+```
+
+This is useful for testing, development purposes, and backing up data.
+
+### 7. Run Server
 
 ```bash
 python3 manage.py runserver
@@ -167,6 +200,9 @@ python3 manage.py migrate
 
 # Create superuser for admin access
 python3 manage.py createsuperuser
+
+# Load fixture data (if you have a posts.json file)
+python3 ./manage.py loaddata posts
 ```
 
 ### Deployment Setup
