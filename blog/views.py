@@ -5,4 +5,6 @@ from .models import Post
 # Create your views here.
 
 class PostList(generic.ListView):
-    model = Post
+    # model = Post  # Class-based generic views
+    queryset = Post.objects.filter(status=1).order_by("created_on")
+    # template_name = "post_list.html"
