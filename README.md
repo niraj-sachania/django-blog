@@ -71,18 +71,39 @@ urlpatterns = [
 ### 5. Troubleshooting
 
 - **psycopg2 Installation Issue**: If you encounter a `Getting requirements to build wheel` error when installing `psycopg2`, use the pre-compiled binary package instead:
+
   ```bash
   pip3 install psycopg2-binary
   ```
+
   This avoids the need to compile from source. For more details, see the [official documentation](https://www.psycopg.org/docs/install.html).
 
-- **Admin Theme/Styling Not Loading**: If the Django admin panel appears without CSS styling, set `DEBUG = True` in `config/settings.py`. This is typically needed during local development. In production, ensure static files are properly configured and collected.
+- **Admin Theme/Styling Not Loading**: If the Django admin panel appears without CSS styling, you have three options:
+
+  **Option 1 (Development):** Set `DEBUG = True` in `config/settings.py`
+
+  **Option 2 (Production):** Collect static files:
+
+  ```bash
+  python3 manage.py collectstatic
+  ```
+
+  Ensure `STATIC_ROOT` and `STATIC_URL` are properly configured in your settings.
+
+  **Option 3 (Heroku):** Remove the `DISABLE_COLLECTSTATIC` config variable:
+
+  ```bash
+  heroku config:unset DISABLE_COLLECTSTATIC
+  ```
+
+  Then redeploy your app. Heroku will automatically run collectstatic during deployment.
 
 ### 6. Load Sample Data (Optional)
 
 To populate the database with sample blog posts:
 
 1. Create a fixtures directory:
+
    ```bash
    mkdir -p blog/fixtures
    ```
@@ -166,8 +187,9 @@ source /Users/nss/Documents/dev/2025/django-blog/.venv/bin/activate
 # Install Django
 pip3 install django~=4.2.1
 
-# Save dependencies
+# Save dependencies (use --local to exclude global packages)
 pip3 freeze > requirements.txt
+pip3 freeze --local > requirements.txt
 ```
 
 ### Project Creation
@@ -232,6 +254,9 @@ git push heroku main
 
 # Run migrations on Heroku
 heroku run python manage.py migrate
+
+# Collect static files (for production)
+python3 manage.py collectstatic
 
 # Create superuser on Heroku
 heroku run python manage.py createsuperuser
