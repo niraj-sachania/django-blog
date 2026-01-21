@@ -1,0 +1,8 @@
+{
+  "name": "django-blog",
+  "version": "1.0.0",
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "prettier-plugin-jinja-template": "^1.0.0"
+  }
+}

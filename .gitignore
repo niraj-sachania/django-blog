@@ -2,3 +2,4 @@
 __pycache__
 env.py
 blog/fixtures/
+node_modules
