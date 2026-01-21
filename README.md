@@ -227,6 +227,51 @@ python3 manage.py createsuperuser
 python3 ./manage.py loaddata posts
 ```
 
+### Additional Package Installations
+
+```bash
+# Install Django Allauth (for authentication)
+pip3 install django-allauth
+
+# Install Django Summernote (for rich text editor)
+pip3 install django-summernote
+
+# Update requirements
+pip3 freeze --local > requirements.txt
+```
+
+**Required configurations:**
+
+**Django Allauth:**
+
+- Add `'django.contrib.sites'`, `'allauth'`, `'allauth.account'`, `'allauth.socialaccount'` to `INSTALLED_APPS`
+- Add `'allauth.account.middleware.AccountMiddleware'` to `MIDDLEWARE`
+- Set `SITE_ID = 1`
+- Configure `LOGIN_REDIRECT_URL` and `LOGOUT_REDIRECT_URL`
+- Add `path("accounts/", include("allauth.urls"))` to `urls.py`
+- Run migrations: `python3 manage.py migrate`
+
+**Django Summernote:**
+
+- Add `'django_summernote'` to `INSTALLED_APPS`
+- Add `path('summernote/', include('django_summernote.urls'))` to `urls.py`
+- Run migrations: `python3 manage.py migrate`
+- Use in admin: `from django_summernote.admin import SummernoteModelAdmin`
+
+**dj-database-url:**
+
+- Import in settings: `import dj_database_url`
+- Parse DATABASE_URL: `DATABASES = {'default': dj_database_url.parse(os.getenv("DATABASE_URL"))}`
+
+**Gunicorn:**
+
+- Create `Procfile`: `web: gunicorn config.wsgi`
+- No additional Django configuration needed
+
+**psycopg2-binary:**
+
+- No configuration needed (PostgreSQL adapter for Python)
+
 ### Deployment Setup
 
 ```bash
