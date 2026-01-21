@@ -1,6 +1,10 @@
-{% load static %} {% url 'home' as home_url %}
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html class="h-100" lang="en">
   <head>
     <title>CodeStar Blog</title>
@@ -77,7 +81,7 @@
 
     <main class="flex-shrink-0 main-bg">
       {% block content %}
-      <!-- Content Goes here -->
+        <!-- Content Goes here -->
       {% endblock content %}
     </main>
 
